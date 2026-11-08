@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Israel O. Kukoyi — IT & Web Developer</title>
+<meta name="description" content="Portfolio of Israel O. Kukoyi — York University IT student, web developer, creative technologist, and community builder.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+<style>
+/* ─── DESIGN TOKENS ──────────────────────────────────────── */
+:root, [data-theme="light"] {
+  --text-xs: clamp(0.75rem,0.7rem + 0.25vw,0.875rem);
+  --text-sm: clamp(0.875rem,0.8rem + 0.35vw,1rem);
+  --text-base: clamp(1rem,0.95rem + 0.25vw,1.125rem);
+  --text-lg: clamp(1.125rem,1rem + 0.75vw,1.5rem);
+  --text-xl: clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+  --text-2xl: clamp(2rem,1.2rem + 2.5vw,3.5rem);
+  --text-me: clamp(3rem,0.5rem + 7vw,7rem);
+  --space-1: 0.25rem; --space-2: 0.5rem; --space-3: 0.75rem;
+  --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem;
+  --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem;
+  --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
+  --color-bg: #f7f6f2; --color-surface: #f9f8f5;
+  --color-surface-2: #fbfbf9; --color-surface-offset: #f0ede8;
+  --color-divider: #dcd9d5; --color-border: #d4d1ca;
+  --color-text: #28251d; --color-text-muted: #6a6862;
+  --color-text-faint: #a8a6a0; --color-text-inverse: #f9f8f4;
+  --color-primary: #01696f; --color-primary-hover: #0c4e54;
+  --color-primary-active: #0f3638; --color-primary-highlight: #cedcd8;
+  --color-gold: #c08800; --color-gold-light: #f5e6a3;
+  --radius-sm: 0.375rem; --radius-md: 0.5rem;
+  --radius-lg: 0.75rem; --radius-xl: 1rem; --radius-full: 9999px;
+  --transition-interactive: 180ms cubic-bezier(0.16,1,0.3,1);
+  --shadow-sm: 0 1px 2px oklch(0.2 0.01 80/0.07);
+  --shadow-md: 0 4px 12px oklch(0.2 0.01 80/0.09);
+  --shadow-lg: 0 12px 32px oklch(0.2 0.01 80/0.13);
+  --content-narrow: 640px; --content-default: 960px; --content-wide: 1200px;
+  --font-display: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Work Sans', 'Helvetica Neue', sans-serif;
+}
+[data-theme="dark"] {
+  --color-bg: #121110; --color-surface: #1a1918;
+  --color-surface-2: #1f1e1c; --color-surface-offset: #252321;
+  --color-divider: #2a2826; --color-border: #343230;
+  --color-text: #d8d6d2; --color-text-muted: #7e7c79;
+  --color-text-faint: #504e4c; --color-text-inverse: #1a1918;
+  --color-primary: #4fa8b0; --color-primary-hover: #2e8e97;
+  --color-primary-active: #1a6e75; --color-primary-highlight: #1e3638;
+  --color-gold: #e8b934; --color-gold-light: #3d2f08;
+  --shadow-sm: 0 1px 2px oklch(0 0 0/0.25);
+  --shadow-md: 0 4px 12px oklch(0 0 0/0.35);
+  --shadow-lg: 0 12px 32px oklch(0 0 0/0.5);
+}
+
+/* ─── BASE ───────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-font-smoothing:antialiased}
+body{min-height:100dvh;line-height:1.65;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg);transition:background var(--transition-interactive),color var(--transition-interactive)}
+img,svg{display:block;max-width:100%;height:auto}
+ul[role="list"],ol[role="list"]{list-style:none}
+input,button,textarea,select{font:inherit;color:inherit}
+h1,h2,h3,h4,h5,h6{text-wrap:balance;line-height:1.15;font-family:var(--font-display)}
+p,li{text-wrap:pretty;max-width:72ch}
+::selection{background:oklch(from var(--color-primary) l c h/0.25);color:var(--color-text)}
+:focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+a,button,[role="button"]{transition:color var(--transition-interactive),background var(--transition-interactive),box-shadow var(--transition-interactive),border-color var(--transition-interactive)}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ─── LAYOUT HELPERS ─────────────────────────────────────── */
+.container{max-width:var(--content-default);margin-inline:auto;padding-inline:var(--space-6)}
+.container--wide{max-width:var(--content-wide)}
+
+/* ─── SKIP LINK ──────────────────────────────────────────── */
+.skip-link{position:absolute;top:-60px;left:var(--space-4);background:var(--color-primary);color:var(--color-text-inverse);padding:var(--space-2) var(--space-4);border-radius:var(--radius-md);font-size:var(--text-sm);z-index:9999}
+.skip-link:focus{top:var(--space-4)}
+
+/* ─── NAV ────────────────────────────────────────────────── */
+/* Scoped to the header nav only — a bare `nav` selector would also
+   pin the footer nav over the header. */
+nav[aria-label="Primary navigation"]{position:fixed;top:0;left:0;right:0;z-index:100;background:oklch(from var(--color-bg) l c h/0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--color-divider)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px;max-width:var(--content-wide);margin-inline:auto;padding-inline:var(--space-6)}
+.nav-logo{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text);text-decoration:none;letter-spacing:-0.01em}
+.nav-logo span{color:var(--color-primary)}
+.nav-links{display:flex;gap:var(--space-6);list-style:none;align-items:center}
+.nav-links a{font-size:var(--text-sm);color:var(--color-text-muted);text-decoration:none;font-weight:500;letter-spacing:0.01em}
+.nav-links a:hover{color:var(--color-text)}
+.nav-right{display:flex;align-items:center;gap:var(--space-4)}
+.theme-toggle{background:none;border:1px solid var(--color-border);border-radius:var(--radius-full);padding:var(--space-2);width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--color-text-muted)}
+.theme-toggle:hover{color:var(--color-text);border-color:var(--color-text-muted)}
+.nav-cta{background:var(--color-primary);color:var(--color-text-inverse);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:600;text-decoration:none;border:none;cursor:pointer}
+.nav-cta:hover{background:var(--color-primary-hover)}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:var(--space-2);color:var(--color-text)}
+.mobile-menu{display:none;position:fixed;inset:64px 0 0 0;background:var(--color-bg);z-index:99;padding:var(--space-8) var(--space-6);flex-direction:column;gap:var(--space-6)}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-size:var(--text-xl);font-family:var(--font-display);color:var(--color-text);text-decoration:none}
+.mobile-menu a:hover{color:var(--color-primary)}
+@media(max-width:768px){.nav-links,.nav-cta{display:none}.hamburger{display:flex}}
+
+/* ─── ME───────────────────────────────────────────────── */
+.me{padding-top:clamp(var(--space-24),20vw,11rem);padding-bottom:clamp(var(--space-16),10vw,7rem);overflow:hidden;position:relative}
+.me-eyebrow{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-family:var(--font-body);letter-spacing:0.1em;text-transform:uppercase;color:var(--color-primary);font-weight:600;margin-bottom:var(--space-5)}
+.me-eyebrow::before{content:'';display:block;width:24px;height:2px;background:var(--color-primary)}
+.me-name{font-size:var(--text-me);color:var(--color-text);margin-bottom:var(--space-4);letter-spacing:-0.03em;line-height:1.02}
+.me-name em{font-style:italic;color:var(--color-primary)}
+.me-tagline{font-size:var(--text-lg);color:var(--color-text-muted);max-width:52ch;margin-bottom:var(--space-10);font-family:var(--font-body);font-weight:400;line-height:1.6}
+.me-actions{display:flex;gap:var(--space-4);flex-wrap:wrap}
+.btn-primary{background:var(--color-primary);color:var(--color-text-inverse);padding:var(--space-3) var(--space-8);border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:600;text-decoration:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:var(--space-2)}
+.btn-primary:hover{background:var(--color-primary-hover)}
+.btn-outline{background:transparent;color:var(--color-text);padding:var(--space-3) var(--space-8);border-radius:var(--radius-full);font-size:var(--text-sm);font-weight:600;text-decoration:none;border:1px solid var(--color-border);display:inline-flex;align-items:center;gap:var(--space-2)}
+.btn-outline:hover{border-color:var(--color-text-muted);background:var(--color-surface)}
+.me-stats{display:flex;gap:var(--space-10);margin-top:var(--space-16);padding-top:var(--space-10);border-top:1px solid var(--color-divider)}
+.stat-num{font-family:var(--font-display);font-size:var(--text-xl);color:var(--color-text);display:block}
+.stat-label{font-size:var(--text-xs);color:var(--color-text-muted);text-transform:uppercase;letter-spacing:0.08em;font-weight:500}
+.me-scroll-line{position:absolute;right:var(--space-12);bottom:var(--space-8);display:flex;flex-direction:column;align-items:center;gap:var(--space-3);font-size:var(--text-xs);text-transform:uppercase;letter-spacing:0.1em;color:var(--color-text-faint)}
+.me-scroll-line::after{content:'';display:block;width:1px;height:60px;background:var(--color-divider)}
+@media(max-width:600px){.me-stats{flex-wrap:wrap;gap:var(--space-6)}.me-scroll-line{display:none}}
+
+/* ─── SECTION TITLES ─────────────────────────────────────── */
+section{padding-block:clamp(var(--space-12),8vw,var(--space-24))}
+.section-label{font-size:var(--text-xs);font-family:var(--font-body);letter-spacing:0.12em;text-transform:uppercase;color:var(--color-primary);font-weight:600;margin-bottom:var(--space-4);display:flex;align-items:center;gap:var(--space-2)}
+.section-label::before{content:'';display:block;width:20px;height:2px;background:var(--color-primary)}
+.section-title{font-size:var(--text-2xl);color:var(--color-text);margin-bottom:var(--space-6);letter-spacing:-0.02em}
+.section-subtitle{font-size:var(--text-base);color:var(--color-text-muted);max-width:56ch;margin-bottom:var(--space-12);font-family:var(--font-body);line-height:1.7}
+
+/* ─── ABOUT ──────────────────────────────────────────────── */
+#about{background:var(--color-surface)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:start}
+.about-text p{color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-5);font-size:var(--text-base)}
+.about-text p strong{color:var(--color-text);font-weight:600}
+.about-text p:last-child{margin-bottom:0}
+.about-right{display:flex;flex-direction:column;gap:var(--space-6)}
+.value-card{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-sm)}
+.value-card-icon{font-size:1.5rem;margin-bottom:var(--space-3)}
+.value-card h4{font-size:var(--text-base);color:var(--color-text);margin-bottom:var(--space-2);font-weight:600;font-family:var(--font-body)}
+.value-card p{font-size:var(--text-sm);color:var(--color-text-muted);max-width:100%;line-height:1.6}
+.about-certifications{margin-top:var(--space-8);display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.cert-badge{display:inline-flex;align-items:center;gap:var(--space-2);background:var(--color-primary-highlight);color:var(--color-primary);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;letter-spacing:0.04em}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr}}
+
+/* ─── SKILLS ─────────────────────────────────────────────── */
+#skills{background:var(--color-bg)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:var(--space-4)}
+.skill-card{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-sm);transition:box-shadow var(--transition-interactive),transform var(--transition-interactive)}
+.skill-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.skill-card-header{display:flex;align-items:center;gap:var(--space-3);margin-bottom:var(--space-4)}
+.skill-icon{width:40px;height:40px;border-radius:var(--radius-md);background:var(--color-primary-highlight);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.skill-card h3{font-size:var(--text-base);font-weight:600;font-family:var(--font-body);color:var(--color-text)}
+.skill-tags{display:flex;flex-wrap:wrap;gap:var(--space-2)}
+.tag{background:var(--color-surface-offset);color:var(--color-text-muted);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:500}
+
+/* ─── PROJECTS ───────────────────────────────────────────── */
+#projects{background:var(--color-surface)}
+.projects-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6)}
+.project-card{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-sm);transition:box-shadow var(--transition-interactive),transform var(--transition-interactive)}
+.project-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.project-card--featured{grid-column:1/-1}
+.project-visual{height:200px;background:linear-gradient(135deg,var(--color-primary-highlight),var(--color-surface-offset));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.project-visual-lg{height:280px}
+.project-visual-code{font-family:monospace;font-size:var(--text-sm);color:var(--color-primary);padding:var(--space-6);line-height:1.8;text-align:left;align-items:flex-start;flex-direction:column}
+.project-body{padding:var(--space-6)}
+.project-tag{display:inline-block;background:var(--color-primary-highlight);color:var(--color-primary);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;margin-bottom:var(--space-3)}
+.project-body h3{font-size:var(--text-lg);color:var(--color-text);margin-bottom:var(--space-3)}
+.project-body p{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.65;margin-bottom:var(--space-4);max-width:100%}
+.project-link{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:600;color:var(--color-primary);text-decoration:none}
+.project-link:hover{color:var(--color-primary-hover)}
+@media(max-width:768px){.projects-grid{grid-template-columns:1fr}.project-card--featured{grid-column:auto}}
+
+/* ─── EXPERIENCE ─────────────────────────────────────────── */
+#experience{background:var(--color-bg)}
+.timeline{display:flex;flex-direction:column;gap:var(--space-1)}
+.timeline-item{display:grid;grid-template-columns:180px 1fr;gap:var(--space-8);padding:var(--space-6) 0;border-top:1px solid var(--color-divider)}
+.timeline-item:first-child{border-top:none}
+.timeline-meta{padding-top:var(--space-1)}
+.timeline-period{font-size:var(--text-xs);font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-primary);display:block;margin-bottom:var(--space-2)}
+.timeline-company{font-size:var(--text-sm);color:var(--color-text-muted);font-weight:500}
+.timeline-type{display:inline-block;font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-1);background:var(--color-surface-offset);padding:2px var(--space-2);border-radius:var(--radius-full)}
+.timeline-content h3{font-size:var(--text-lg);color:var(--color-text);margin-bottom:var(--space-3);font-weight:600;font-family:var(--font-body)}
+.timeline-content ul{list-style:none;display:flex;flex-direction:column;gap:var(--space-2)}
+.timeline-content li{font-size:var(--text-sm);color:var(--color-text-muted);padding-left:var(--space-5);position:relative;line-height:1.65;max-width:100%}
+.timeline-content li::before{content:'→';position:absolute;left:0;color:var(--color-primary);font-size:.75em;top:2px}
+@media(max-width:700px){.timeline-item{grid-template-columns:1fr}.timeline-period,.timeline-company,.timeline-type{display:inline;margin-right:var(--space-2)}}
+
+/* ─── RESUME SECTION ─────────────────────────────────────── */
+#resume{background:var(--color-surface)}
+.resume-wrapper{background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-xl);overflow:hidden;box-shadow:var(--shadow-md)}
+.resume-toolbar{display:flex;align-items:center;justify-content:space-between;padding:var(--space-4) var(--space-6);border-bottom:1px solid var(--color-divider);background:var(--color-surface-offset)}
+.resume-toolbar-title{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+.resume-toolbar-actions{display:flex;gap:var(--space-3)}
+.resume-btn{display:inline-flex;align-items:center;gap:var(--space-2);background:var(--color-primary);color:var(--color-text-inverse);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;text-decoration:none;border:none;cursor:pointer}
+.resume-btn:hover{background:var(--color-primary-hover)}
+.resume-btn-outline{background:transparent;border:1px solid var(--color-border);color:var(--color-text-muted);padding:var(--space-2) var(--space-4);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;cursor:pointer}
+.resume-btn-outline:hover{border-color:var(--color-text-muted);color:var(--color-text)}
+.resume-doc{padding:clamp(var(--space-8),5vw,var(--space-16));font-family:var(--font-body);color:var(--color-text)}
+.resume-header-section{display:grid;grid-template-columns:1fr auto;gap:var(--space-8);align-items:start;margin-bottom:var(--space-10);padding-bottom:var(--space-8);border-bottom:2px solid var(--color-primary)}
+.resume-name{font-family:var(--font-display);font-size:clamp(2rem,4vw,3rem);color:var(--color-text);letter-spacing:-0.02em;margin-bottom:var(--space-2)}
+.resume-title{font-size:var(--text-base);color:var(--color-primary);font-weight:600;margin-bottom:var(--space-4)}
+.resume-contact{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.resume-contact-item{font-size:var(--text-xs);color:var(--color-text-muted);display:flex;align-items:center;gap:var(--space-1)}
+.resume-section-title{font-size:var(--text-sm);font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--color-primary);margin-bottom:var(--space-4);padding-bottom:var(--space-2);border-bottom:1px solid var(--color-divider);font-family:var(--font-body)}
+.resume-block{margin-bottom:var(--space-10)}
+.resume-job-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:var(--space-3);flex-wrap:wrap;gap:var(--space-2)}
+.resume-job-title{font-size:var(--text-base);font-weight:700;color:var(--color-text)}
+.resume-job-period{font-size:var(--text-xs);color:var(--color-primary);font-weight:600;white-space:nowrap}
+.resume-job-company{font-size:var(--text-sm);color:var(--color-text-muted);margin-bottom:var(--space-4)}
+.resume-bullets{list-style:none;display:flex;flex-direction:column;gap:var(--space-2)}
+.resume-bullets li{font-size:var(--text-sm);color:var(--color-text-muted);padding-left:var(--space-5);position:relative;line-height:1.6;max-width:100%}
+.resume-bullets li::before{content:'▸';position:absolute;left:0;color:var(--color-primary);font-size:.8em}
+.resume-skills-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:var(--space-3)}
+.resume-skill-group h4{font-size:var(--text-xs);font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--color-text);margin-bottom:var(--space-2)}
+.resume-skill-group p{font-size:var(--text-xs);color:var(--color-text-muted);line-height:1.6}
+.resume-two-col{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-8)}
+@media(max-width:600px){.resume-header-section{grid-template-columns:1fr}.resume-two-col{grid-template-columns:1fr}}
+
+/* ─── CONTACT ────────────────────────────────────────────── */
+#contact{background:var(--color-bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-16);align-items:start}
+.contact-left p{color:var(--color-text-muted);line-height:1.75;margin-bottom:var(--space-6);max-width:48ch}
+.contact-links{display:flex;flex-direction:column;gap:var(--space-4)}
+.contact-link-item{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-4) var(--space-5);background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-lg);text-decoration:none;color:var(--color-text);transition:box-shadow var(--transition-interactive),transform var(--transition-interactive)}
+.contact-link-item:hover{box-shadow:var(--shadow-md);transform:translateX(4px);border-color:var(--color-primary)}
+.contact-link-icon{width:40px;height:40px;border-radius:var(--radius-md);background:var(--color-primary-highlight);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-link-text strong{display:block;font-size:var(--text-sm);font-weight:600;margin-bottom:2px}
+.contact-link-text span{font-size:var(--text-xs);color:var(--color-text-muted)}
+.contact-form{display:flex;flex-direction:column;gap:var(--space-4)}
+.form-group{display:flex;flex-direction:column;gap:var(--space-2)}
+.form-group label{font-size:var(--text-sm);font-weight:600;color:var(--color-text)}
+.form-group input,.form-group textarea{background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:var(--space-3) var(--space-4);font-size:var(--text-sm);color:var(--color-text);resize:vertical}
+.form-group input:focus,.form-group textarea:focus{outline:2px solid var(--color-primary);outline-offset:2px;border-color:transparent}
+.form-group textarea{min-height:120px}
+@media(max-width:768px){.contact-grid{grid-template-columns:1fr}}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+footer{background:var(--color-surface);border-top:1px solid var(--color-divider);padding:var(--space-10) 0}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:var(--space-4)}
+.footer-name{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text)}
+.footer-copy{font-size:var(--text-xs);color:var(--color-text-faint)}
+.footer-nav{display:flex;gap:var(--space-6)}
+.footer-nav a{font-size:var(--text-xs);color:var(--color-text-muted);text-decoration:none}
+.footer-nav a:hover{color:var(--color-primary)}
+
+/* ─── FADE-IN ─────────────────────────────────────────────── */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ── NAV ─────────────────────────────────────────────────── -->
+<nav aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">I<span>.</span>Kukoyi</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#resume">Resume</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" data-theme-toggle aria-label="Switch to light mode">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      </button>
+      <a href="#contact" class="nav-cta">Hire Me</a>
+    </div>
+    <button class="hamburger" aria-label="Open menu" onclick="document.querySelector('.mobile-menu').classList.toggle('open')">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" role="dialog" aria-label="Mobile navigation">
+  <a href="#about" onclick="document.querySelector('.mobile-menu').classList.remove('open')">About</a>
+  <a href="#skills" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Skills</a>
+  <a href="#projects" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Projects</a>
+  <a href="#experience" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Experience</a>
+  <a href="#resume" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Resume</a>
+  <a href="#contact" onclick="document.querySelector('.mobile-menu').classList.remove('open')">Contact</a>
+</div>
+
+<!-- ── MAIN ─────────────────────────────────────────────────── -->
+<main id="main">
+
+<!-- ── ME──────────────────────────────────────────────────── -->
+<section class="me" aria-labelledby="me-heading">
+  <div class="container">
+    <div class="me-eyebrow">Available for opportunities</div>
+    <h1 class="me-name" id="me-heading">Israel O.<br><em>Kukoyi</em></h1>
+    <p class="me-tagline">IT student, web developer & creative technologist — building accessible digital experiences and solving real-world problems through code.</p>
+    <div class="me-actions">
+      <a href="#projects" class="btn-primary">View My Work
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#resume" class="btn-outline">Download Resume</a>
+    </div>
+    <div class="me-stats">
+      <div>
+        <span class="stat-num">5+</span>
+        <span class="stat-label">Years of Experience</span>
+      </div>
+      <div>
+        <span class="stat-num">2</span>
+        <span class="stat-label">Years of Research & Volunteering</span>
+      </div>
+      <div>
+        <span class="stat-num">15+</span>
+        <span class="stat-label">Languages & Frameworks</span>
+      </div>
+      <div>
+        <span class="stat-num">Tri</span>
+        <span class="stat-label">Lingual (EN/FR/YOR)</span>
+      </div>
+    </div>
+  </div>
+  <span class="me-scroll-line" aria-hidden="true">Scroll</span>
+</section>
+
+<!-- ── ABOUT ──────────────────────────────────────────────────── -->
+<section id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="section-label">Who I Am</div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <h2 class="section-title" id="about-heading">Creativity is how I solve problems.</h2>
+        <p>I am an <strong>Information Technology student at York University</strong> with a love for innovation and creativity. Since a young age from crayon drawings, to Microsoft Paint, learning about philosophy or designing interactive maps for a real university collective — creativity has always been my way of life.</p>
+        <p>What sets me apart is my love for the game, in anything I set my mind to I give 111%. My background spans web development, software programming, video production, and hands-on community tech support — a rare combination that lets me bridge the gap between technical execution and human impact.</p>
+        <p>I contributed to the <strong>S4 Collective</strong> for two years, designing an interactive Sanctuary Student campus map used to help marginalized students navigate educational systems across Ontario. I also earned a certificate from the <strong>University of Paris</strong> through the GRABS program, where I edited and recorded a podcast on growing up across borders — proof that I can communicate across cultural and technical divides alike.</p>
+        <p>I speak English and French fluently as well as Yoruba. I bring the same meticulous attention to detail whether I'm debugging JavaScript, advising a customer, or training a new colleague. I adapt fast, take ownership, and I genuinely care about the work I produce.</p>
+        <div class="about-certifications">
+          <span class="cert-badge">🎓 York University IT (Honours)</span>
+          <span class="cert-badge">🌍 Université de Paris — GRABS</span>
+          <span class="cert-badge">🗼 DELF Certified</span>
+          <span class="cert-badge">🍺 CANSELL Verified</span>
+        </div>
+      </div>
+      <div class="about-right fade-in">
+        <div class="value-card">
+          <div class="value-card-icon">💡</div>
+          <h4>Creative Problem-Solving</h4>
+          <p>I approach every challenge like a design problem — whether it's writing a function, training a team member, or navigating an unexpected technical failure during a live broadcast.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-icon">🤝</div>
+          <h4>Community-Driven Tech</h4>
+          <p>Two years with the S4 Collective showed me that the best technology serves people. I build with accessibility and equity in mind — not just functionality.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-icon">🚀</div>
+          <h4>Fast Learner & Self-Starter</h4>
+          <p>At UW Whitby I went from sales associate to mentoring new hires within months. I pick up new tools, stacks, and environments quickly and teach others what I learn.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-card-icon">🌐</div>
+          <h4>Cross-Cultural Communication</h4>
+          <p>Bilingual (English/French), internationally certified, and experienced working in diverse teams across Montreal and Toronto. I communicate clearly in any room.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SKILLS ─────────────────────────────────────────────────── -->
+<section id="skills" aria-labelledby="skills-heading">
+  <div class="container">
+    <div class="section-label">What I Know</div>
+    <h2 class="section-title" id="skills-heading">Technical Skills</h2>
+    <p class="section-subtitle">A snapshot of the languages, tools, and platforms I work with across development, media production, and systems support.</p>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-icon">🌐</div>
+          <h3>Web Development</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">HTML5</span><span class="tag">CSS3</span><span class="tag">JavaScript</span><span class="tag">Responsive Design</span><span class="tag">Interactive UI</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-icon">⚙️</div>
+          <h3>Programming</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Java (OOP)</span><span class="tag">R</span><span class="tag">Data Structures</span><span class="tag">Algorithms</span><span class="tag">Eclipse IDE</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-icon">🎬</div>
+          <h3>Media & Content</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">CapCut</span><span class="tag">Adobe Suite</span><span class="tag">Podcast Production</span><span class="tag">YouTube</span><span class="tag">Social Media</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-icon">🖥️</div>
+          <h3>IT Support</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Hardware Troubleshooting</span><span class="tag">AV Setup</span><span class="tag">Live Broadcasting</span><span class="tag">System Diagnostics</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-icon">📊</div>
+          <h3>Business & CRM</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">Salesforce</span><span class="tag">Client Credibility</span><span class="tag">Entrepreneurship</span><span class="tag">Client Relations</span><span class="tag">Google Sheets</span>
+        </div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-card-header">
+          <div class="skill-icon">🌍</div>
+          <h3>Languages</h3>
+        </div>
+        <div class="skill-tags">
+          <span class="tag">English (Native)</span><span class="tag">French (DELF Certified)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROJECTS ───────────────────────────────────────────────── -->
+<section id="projects" aria-labelledby="projects-heading">
+  <div class="container">
+    <div class="section-label">My Work</div>
+    <h2 class="section-title" id="projects-heading">Projects & Portfolio</h2>
+    <p class="section-subtitle">Selected work spanning interactive web apps, community tech, and media production.</p>
+    <div class="projects-grid">
+      <div class="project-card project-card--featured fade-in">
+       <div class="project-visual project-visual-lg" style="padding:0;background:linear-gradient(135deg,#1a2e1a,#2a4a2a);position:relative;overflow:hidden">
+  <!-- Upload CopyOfcampus-colour.png into this repo alongside index.html.
+       If the file is missing, a styled fallback shows instead of a broken image. -->
+  <img src="CopyOfcampus-colour.png"
+       alt="Sanctuary Student interactive campus map"
+       width="1917" height="1078" loading="lazy"
+       style="width:100%;height:100%;object-fit:cover;object-position:center;display:block;"
+       onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:100%;font-size:4rem&quot;>🗺️</div>')">
+  <div style="position:absolute;top:var(--space-3);left:var(--space-3);background:oklch(0.15 0.05 160/0.85);backdrop-filter:blur(6px);color:#4fa8b0;font-size:var(--text-xs);font-weight:700;padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);letter-spacing:0.06em;text-transform:uppercase;">🗺 Live Interactive Map</div>
+</div>
+        <div class="project-body">
+          <span class="project-tag">Featured · Community Tech</span>
+          <h3>Sanctuary Student Interactive Campus Map</h3>
+          <p>Designed and built an interactive HTML/CSS/JS campus map for the S4 Collective — a community organization supporting Sanctuary Students (undocumented/refugee students) in navigating educational institutions across Ontario. The map features clickable building hotspots, information overlays, and accessible design.</p>
+          <a href="http://oldtown.glendon.yorku.ca/~kukoyi/codes/AccessV1.html" target="_blank" rel="noopener noreferrer" class="project-link">View Live Project →</a>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-visual" style="background:linear-gradient(135deg,#1a1a2e,#2d2d50)">🗺️</div>
+        <div class="project-body">
+          <span class="project-tag">Web Development</span>
+          <h3>Future Projects</h3>
+          <p>Future projects coming soon. Any information will be posted here.</p>
+        </div>
+      </div>
+      <div class="project-card fade-in">
+        <div class="project-visual" style="background:linear-gradient(135deg,#1a2a1a,#2a4a2a)">🎙️</div>
+        <div class="project-body">
+          <span class="project-tag">Media Production · Paris</span>
+          <h3>GRABS Podcast — Growing Up Across Borders</h3>
+          <p>Produced and edited a podcast series as part of the University of Paris GRABS program, exploring themes of identity, migration, and cross-cultural upbringing. Earned a certificate of completion for this international collaboration.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ─────────────────────────────────────────────── -->
+<section id="experience" aria-labelledby="exp-heading">
+  <div class="container">
+    <div class="section-label">Career History</div>
+    <h2 class="section-title" id="exp-heading">Work Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-meta">
+          <span class="timeline-period">Apr 2025 – Sep 2025</span>
+          <span class="timeline-company">UW Whitby Inc., Whitby ON</span>
+          <span class="timeline-type">Full-Time</span>
+        </div>
+        <div class="timeline-content">
+          <h3>Field Associate / Customer Service Representative</h3>
+          <ul>
+            <li>Engaged customers through live field campaigns in high-traffic environments, consistently meeting or exceeding sales quotas at an 80% success rate</li>
+            <li>Managed end-to-end customer relationships across live sales, customer service, and client relations spanning multiple campaign locations</li>
+            <li>Took on a mentorship role — facilitating training sessions and coaching new associates on sales strategies, product knowledge, and best practices</li>
+            <li>Conducted proactive follow-ups with prospective and existing customers to reinforce product value and maintain strong client relationships</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-meta">
+          <span class="timeline-period">Dec 2019 – Oct 2022</span>
+          <span class="timeline-company">Rockfield Pentecostal Church, Montreal QC</span>
+          <span class="timeline-type">Volunteer</span>
+        </div>
+        <div class="timeline-content">
+          <h3>IT Technician (Volunteer)</h3>
+          <ul>
+            <li>Ensured seamless broadcasting operations during live events, contributing to a professional and reliable viewer experience</li>
+            <li>Diagnosed and resolved IT-related issues promptly, minimizing downtime and maintaining operational efficiency</li>
+            <li>Set up and managed audio-visual and IT equipment in collaboration with team members; handled on-the-fly schedule and technical changes</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-meta">
+          <span class="timeline-period">Jan 2022 – Oct 2022</span>
+          <span class="timeline-company">Convenience Store, Montreal QC</span>
+          <span class="timeline-type">Full-Time</span>
+        </div>
+        <div class="timeline-content">
+          <h3>Cashier / Store Associate</h3>
+          <ul>
+            <li>Independently managed store operations including opening/closing, inventory, and product deliveries</li>
+            <li>Balanced financial records daily to ensure accuracy and accountability in all monetary transactions</li>
+            <li>Trained new employees and was trusted to oversee recruits and incoming imports</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item fade-in">
+        <div class="timeline-meta">
+          <span class="timeline-period">Feb 2021 – Nov 2021</span>
+          <span class="timeline-company">McDonald's, Montreal QC</span>
+          <span class="timeline-type">Part-Time</span>
+        </div>
+        <div class="timeline-content">
+          <h3>Crew Member</h3>
+          <ul>
+            <li>Delivered exceptional customer service under high-pressure conditions, earning consistently positive feedback and performance reviews</li>
+            <li>Collaborated effectively with team members in both English and French in a fast-paced operational environment</li>
+            <li>Managed monetary transactions with accuracy, ensuring cash register balanced every shift</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── RESUME ─────────────────────────────────────────────────── -->
+<section id="resume" aria-labelledby="resume-heading">
+  <div class="container container--wide">
+    <div class="section-label">Full CV</div>
+    <h2 class="section-title" id="resume-heading">My Resume</h2>
+    <p class="section-subtitle">A complete overview of my qualifications, experience, and education.</p>
+    <div class="resume-wrapper fade-in">
+      <div class="resume-toolbar">
+        <span class="resume-toolbar-title">Israel O. Kukoyi — Resume 2026</span>
+        <div class="resume-toolbar-actions">
+          <button class="resume-btn-outline" onclick="window.print()">🖨️ Print</button>
+          <button class="resume-btn" onclick="downloadResume()">⬇ Download PDF</button>
+        </div>
+      </div>
+      <div class="resume-doc" id="resume-content">
+
+        <div class="resume-header-section">
+          <div>
+            <div class="resume-name">Israel O. Kukoyi</div>
+            <div class="resume-title">IT Student · Web Developer · Creative Technologist</div>
+            <div class="resume-contact">
+              <span class="resume-contact-item">📍 Oshawa, Ontario, Canada</span>
+              <span class="resume-contact-item">🎓 York University</span>
+              <span class="resume-contact-item">🌐 www.github.com — portfolio site</span>
+              <span class="resume-contact-item">✉️ Kukoyiolaoluwa@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="resume-block">
+          <div class="resume-section-title">Highlight of Qualifications</div>
+          <ul class="resume-bullets">
+            <li>Third-year Honours IT student at York University with foundational expertise in web development, software programming, and the integration of business principles with technology</li>
+            <li>Proficient in HTML, CSS, and JavaScript — developed functional, interactive websites including an accessible campus map deployed for the S4 Collective to serve Sanctuary Students across Ontario</li>
+            <li>Experienced in Java (OOP), R, data structures, and algorithms through rigorous coursework; comfortable working in Eclipse and RStudio environments</li>
+            <li>Skilled video editor and media producer: CapCut, Adobe Suite, podcast production; familiar with all major social media platforms (YouTube, TikTok, Instagram, Facebook)</li>
+            <li>Earned a certificate from the University of Paris (GRABS program) for producing and editing a podcast on cross-cultural identity and growing up across borders</li>
+            <li>Key contributor to the S4 Collective for 2 years — designed the interactive Sanctuary Student campus map to improve equitable access and navigation for marginalized students in Ontario's education system</li>
+            <li>Strong adaptability, critical thinking, and teamwork skills developed through coursework and fast-paced work environments; mentorship experience at UW Whitby Inc.</li>
+            <li>Trilingual (English/French/Yoruba) — Official DELF Certificate</li>
+          </ul>
+        </div>
+
+        <div class="resume-block">
+          <div class="resume-section-title">Work Experience</div>
+
+          <div class="resume-job-header">
+            <div>
+              <div class="resume-job-title">Field Associate / Customer Service Representative</div>
+              <div class="resume-job-company">UW Whitby Inc. — Whitby, ON, Canada</div>
+            </div>
+            <div class="resume-job-period">April 2025 – September 2025</div>
+          </div>
+          <ul class="resume-bullets" style="margin-bottom:var(--space-8)">
+            <li>Engaged customers through live field campaigns in high-traffic environments, effectively communicating product value and building rapport under time-limited conditions</li>
+            <li>Consistently met or exceeded sales quotas at an 80% success rate using strong upselling techniques, negotiation skills, and personal connection under pressure</li>
+            <li>Managed end-to-end customer relationships — live sales, ongoing customer service, and client relations across multiple campaign locations</li>
+            <li>Demonstrated rapid skill acquisition; took on a mentorship role facilitating training sessions and coaching new associates on product knowledge and engagement best practices</li>
+            <li>Conducted proactive follow-ups with prospective and existing clients to reinforce product value, address concerns, and maintain long-term relationships</li>
+          </ul>
+
+          <div class="resume-job-header">
+            <div>
+              <div class="resume-job-title">IT Technician (Volunteer)</div>
+              <div class="resume-job-company">Rockfield Pentecostal Church — Montreal, Quebec</div>
+            </div>
+            <div class="resume-job-period">December 2019 – October 2022</div>
+          </div>
+          <ul class="resume-bullets" style="margin-bottom:var(--space-8)">
+            <li>Ensured seamless broadcasting operations during live events, maintaining a professional and reliable viewing experience</li>
+            <li>Diagnosed and resolved IT-related issues promptly, minimizing downtime and restoring operational efficiency</li>
+            <li>Collaborated with team members to set up and manage audio-visual and IT equipment; addressed unexpected technical challenges and schedule changes on the fly</li>
+          </ul>
+
+          <div class="resume-job-header">
+            <div>
+              <div class="resume-job-title">Crew Member</div>
+              <div class="resume-job-company">McDonald's — Montreal, Quebec</div>
+            </div>
+            <div class="resume-job-period">February 2021 – November 2021</div>
+          </div>
+          <ul class="resume-bullets" style="margin-bottom:var(--space-8)">
+            <li>Delivered exceptional customer service under high-pressure conditions, earning positive feedback and strong performance reviews</li>
+            <li>Collaborated effectively in both English and French in a fast-paced, multicultural operational environment</li>
+            <li>Managed monetary transactions with consistent accuracy</li>
+          </ul>
+
+          <div class="resume-job-header">
+            <div>
+              <div class="resume-job-title">Cashier / Store Associate</div>
+              <div class="resume-job-company">Convenience Store — Montreal, Quebec</div>
+            </div>
+            <div class="resume-job-period">January 2022 – October 2022</div>
+          </div>
+          <ul class="resume-bullets">
+            <li>Independently managed store operations including opening/closing, inventory organization, product deliveries, and cash balancing</li>
+            <li>Trained new employees, fostering skills and knowledge to meet store standards</li>
+            <li>Demonstrated trustworthiness — entrusted with full store oversight and responsibility for incoming imports</li>
+          </ul>
+        </div>
+
+        <div class="resume-two-col">
+          <div>
+            <div class="resume-block">
+              <div class="resume-section-title">Education</div>
+              <div class="resume-job-title">Information Technology (Honours)</div>
+              <div class="resume-job-company">York University — Toronto, Ontario</div>
+              <div class="resume-job-period" style="font-size:var(--text-xs);color:var(--color-primary);display:block;margin-top:var(--space-1)">2023 – Expected April 2027</div>
+              <br>
+              <div class="resume-job-title">GRABS Program Certificate</div>
+              <div class="resume-job-company">Université de Paris — Paris, France</div>
+              <br>
+              <div class="resume-job-title">High School Diploma</div>
+            </div>
+            <div class="resume-block">
+              <div class="resume-section-title">Certifications & Awards</div>
+              <ul class="resume-bullets">
+                <li>Official French DELF Certificate — Issued by DELF</li>
+                <li>GRABS Research Certificate — Issued by University of Paris</li>
+                <li>CANSELL Verified — Issued by AGCO</li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class="resume-block">
+              <div class="resume-section-title">Technical Skills</div>
+              <div class="resume-skills-grid">
+                <div class="resume-skill-group">
+                  <h4>Languages</h4>
+                  <p>HTML5, CSS3, JavaScript, Java, R</p>
+                </div>
+                <div class="resume-skill-group">
+                  <h4>Tools & IDEs</h4>
+                  <p>Eclipse, RStudio, Adobe Suite</p>
+                </div>
+                <div class="resume-skill-group">
+                  <h4>Platforms</h4>
+                  <p>YouTube, TikTok, Instagram, CapCut</p>
+                </div>
+                <div class="resume-skill-group">
+                  <h4>Core Competencies</h4>
+                  <p>AI prompting, Web Dev, IT Support, AV Broadcasting, Media Production</p>
+                </div>
+              </div>
+            </div>
+            <div class="resume-block">
+              <div class="resume-section-title">Volunteer Work</div>
+              <div class="resume-job-title">S4 Collective — Web & Map Designer</div>
+              <div class="resume-job-company">2 Years | Designed the interactive Sanctuary Student campus map to support equitable access in Ontario education</div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end resume-doc -->
+    </div><!-- end resume-wrapper -->
+  </div>
+</section>
+
+<!-- ── CONTACT ─────────────────────────────────────────────────── -->
+<section id="contact" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title" id="contact-heading">Let's Work Together</h2>
+    <div class="contact-grid">
+      <div class="contact-left fade-in">
+        <p>I'm actively looking for internships, co-op placements, and freelance web development opportunities. Whether you need a web developer, IT support, content producer, or a creative problem-solver — I'd love to hear from you.</p>
+        <div class="contact-links">
+          <a href="mailto:kukoyiolaoluwa@gmail.com" class="contact-link-item">
+            <div class="contact-link-icon">✉️</div>
+            <div class="contact-link-text">
+              <strong>Email Me</strong>
+              <span>kukoyiolaoluwa@gmail.com</span>
+            </div>
+          </a>
+          <a href="https://www.s4collective.org" target="_blank" rel="noopener noreferrer" class="contact-link-item">
+            <div class="contact-link-icon">🗺️</div>
+            <div class="contact-link-text">
+              <strong>Support S4 Collective</strong>
+              <span>Learn more at s4collective.org</span>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="contact-form fade-in">
+        <div class="form-group">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="Name" placeholder=" " autocomplete="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="Email" placeholder=" " autocomplete="email" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="Message" placeholder="Tell me about your project or opportunity..." required></textarea>
+        </div>
+        <button class="btn-primary" id="sendBtn" onclick="sendMessage()">Send Message
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        </button>
+        <p id="form-msg" style="font-size:var(--text-xs);color:var(--color-primary);margin-top:var(--space-2);display:none"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <span class="footer-name">Israel O. Kukoyi</span>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <span class="footer-copy">© 2026 Israel O. Kukoyi · York University IT</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Theme toggle
+(function(){
+  const t = document.querySelector('[data-theme-toggle]');
+  const r = document.documentElement;
+  let d = r.getAttribute('data-theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
+  r.setAttribute('data-theme', d);
+  function updateIcon() {
+    if (!t) return;
+    t.innerHTML = d === 'dark'
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    t.setAttribute('aria-label', 'Switch to ' + (d === 'dark' ? 'light' : 'dark') + ' mode');
+  }
+  updateIcon();
+  t && t.addEventListener('click', () => {
+    d = d === 'dark' ? 'light' : 'dark';
+    r.setAttribute('data-theme', d);
+    updateIcon();
+  });
+})();
+
+// Fade-in on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+// Stagger fade-in for grid children
+document.querySelectorAll('.skills-grid, .projects-grid').forEach(grid => {
+  grid.querySelectorAll('.fade-in').forEach((el, i) => { el.style.transitionDelay = (i * 80) + 'ms'; });
+});
+
+// Resume download (print to PDF)
+function downloadResume() {
+  window.print();
+}
+
+// Contact form — sends to your email via FormSubmit (https://formsubmit.co).
+// No signup or API key needed: the FIRST submission triggers a one-time
+// activation email to kukoyiolaoluwa@gmail.com — click it once and all
+// future messages arrive in your inbox.
+async function sendMessage() {
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const msg = document.getElementById('message').value.trim();
+  const feedback = document.getElementById('form-msg');
+  const btn = document.getElementById('sendBtn');
+  if (!name || !email || !msg) {
+    feedback.textContent = '⚠️ Please fill in all fields.';
+    feedback.style.color = 'var(--color-gold)';
+    feedback.style.display = 'block';
+    return;
+  }
+  btn.disabled = true;
+  feedback.textContent = 'Sending…';
+  feedback.style.color = 'var(--color-text-muted)';
+  feedback.style.display = 'block';
+  try {
+    const res = await fetch('https://formsubmit.co/ajax/kukoyiolaoluwa@gmail.com', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ Name: name, Email: email, Message: msg })
+    });
+    const result = await res.json();
+    if (result.success === 'true' || result.success === true) {
+      feedback.textContent = '✅ Thanks! Your message has been sent.';
+      feedback.style.color = 'var(--color-primary)';
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+    } else {
+      feedback.textContent = '⚠️ Could not send — please email me directly instead.';
+      feedback.style.color = 'var(--color-gold)';
+    }
+  } catch (err) {
+    feedback.textContent = '⚠️ Could not send — please email me directly instead.';
+    feedback.style.color = 'var(--color-gold)';
+  }
+  btn.disabled = false;
+}
+</script>
+
+<script data-pplx-inline-edit>
+(function () {
+  if (window === window.top) return;
+
+  const allowedParentOrigins = ["https://www.perplexity.ai","https://perplexity.ai","https://testing.perplexity.ai","https://staging.perplexity.ai","https://*.preview.i.perplexity.ai","http://perplexity.localhost","http://localhost:1420","http://127.0.0.1:1420","http://localhost:3000","http://127.0.0.1:3000","http://localhost:5173","http://127.0.0.1:5173"];
+  const MAX_FONT_BYTES = 500 * 1024;
+  const MAX_TOTAL_FONT_BYTES = 2 * 1024 * 1024;
+  const DEFAULT_LINE_HEIGHT = 16;
+  let scrollForwarding = false;
+  let scrollRaf = 0;
+  let trustedTopOrigin = null;
+
+  // Allow entries like "https://*.preview.i.perplexity.ai" — the wildcard
+  // matches a single DNS label (no dots), so "https://*.foo" cannot stretch
+  // across multiple labels.
+  function matchesAllowedOrigin(origin) {
+    if (!origin) return false;
+    for (const entry of allowedParentOrigins) {
+      if (!entry.includes("*")) {
+        if (entry === origin) return true;
+        continue;
+      }
+      const pattern = new RegExp(
+        "^" +
+          entry.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[^.]+") +
+          "$",
+      );
+      if (pattern.test(origin)) return true;
+    }
+    return false;
+  }
+
+  // Trust decision: when the sender is same-origin-visible (event.origin is a
+  // real origin like https://www.perplexity.ai) we trust event.origin directly.
+  // When event.origin is "null" (opaque broker srcdoc), we fall back to the
+  // broker's stamped `parentOrigin` to identify the top window. The fallback
+  // is claim-only — we rely on the browser's native `targetOrigin` enforcement
+  // on the response path (see postToTrustedTop) to ensure replies can't be
+  // delivered to anyone but the actual top window of that claimed origin.
+  function getTrustedParentOrigin(event) {
+    const forwardedParentOrigin =
+      typeof event.data.parentOrigin === "string" ? event.data.parentOrigin : null;
+    const parentOrigin = event.origin === "null" ? forwardedParentOrigin : event.origin;
+    return matchesAllowedOrigin(parentOrigin) ? parentOrigin : null;
+  }
+
+  // All responses go to window.top with targetOrigin = the allowlisted origin.
+  // An attacker that iframes us inside their own null-origin broker can claim
+  // any parentOrigin they like, but the browser will drop the reply whenever
+  // the real top's origin doesn't match — so the screenshot never leaves.
+  function postToTrustedTop(message) {
+    if (!trustedTopOrigin) return;
+    try {
+      window.top.postMessage(message, trustedTopOrigin);
+    } catch (_error) {}
+  }
+
+  const PICK_CAPABILITIES = ["pick"];
+  const PICK_CHAIN_LENGTH = 4;
+  const PICK_MAX_TEXT_CHARS = 120;
+  const PICK_MAX_HTML_CHARS = 300;
+
+  function truncate(value, maxChars) {
+    return value.length > maxChars ? value.slice(0, maxChars - 1) + "…" : value;
+  }
+
+  function isPickableElement(element) {
+    return (
+      element instanceof Element &&
+      element !== document.documentElement &&
+      element !== document.body
+    );
+  }
+
+  function resolvePickTarget(x, y) {
+    if (!Number.isFinite(x) || !Number.isFinite(y)) return null;
+    const element = document.elementFromPoint(x, y);
+    return isPickableElement(element) ? element.closest("svg") || element : null;
+  }
+
+  function pickLabel(element) {
+    if (element.id) return element.localName + "#" + element.id;
+    return [element.localName].concat(Array.from(element.classList).slice(0, 2)).join(".");
+  }
+
+  // Only attributes that help find the element in source. data-* values and URL
+  // query strings or fragments can carry tokens.
+  const PICK_ATTRIBUTES = new Set([
+    "id",
+    "class",
+    "name",
+    "type",
+    "role",
+    "alt",
+    "aria-label",
+    "href",
+    "src",
+  ]);
+
+  function pickAttributeValue(attribute) {
+    return attribute.name === "href" || attribute.name === "src"
+      ? attribute.value.split(/[?#]/)[0]
+      : attribute.value;
+  }
+
+  function describePickElement(element) {
+    const chain = [];
+    for (
+      let current = element;
+      isPickableElement(current) && chain.length < PICK_CHAIN_LENGTH;
+      current = current.parentElement
+    ) {
+      chain.unshift(current);
+    }
+    const attributes = Array.from(element.attributes)
+      .filter((attribute) => PICK_ATTRIBUTES.has(attribute.name))
+      .map((attribute) => ` ${attribute.name}="${pickAttributeValue(attribute).replace(/"/g, "&quot;")}"`)
+      .join("");
+    const text = (element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    return {
+      chain: chain.map(pickLabel),
+      html: truncate(`<${element.localName}${attributes}>`, PICK_MAX_HTML_CHARS),
+      text: text ? truncate(text, PICK_MAX_TEXT_CHARS) : undefined,
+    };
+  }
+
+  // Hover asks once per frame, and innerText on a large section forces layout,
+  // so only the rect is re-read while the pointer stays on the same element.
+  // Clicks ask for fresh details since the page may have changed the element.
+  let lastPick = null;
+
+  function describePickTarget(element, fresh) {
+    if (fresh || lastPick?.element !== element) {
+      lastPick = { element, details: describePickElement(element) };
+    }
+    const rect = element.getBoundingClientRect();
+    return {
+      rect: { x: rect.left, y: rect.top, width: rect.width, height: rect.height },
+      ...lastPick.details,
+    };
+  }
+
+  function inlineAll(original, clone) {
+    if (original.nodeType !== 1 || clone.nodeType !== 1) return;
+
+    try {
+      const computedStyle = getComputedStyle(original);
+      // cssText on a computed style is the serialized declaration in modern
+      // Chromium/Safari — a single read beats enumerating ~400 longhand
+      // properties. Firefox returns "" here, so we fall back on empty.
+      const serialized = computedStyle.cssText;
+      if (serialized) {
+        clone.style.cssText = serialized;
+      } else {
+        const parts = new Array(computedStyle.length);
+        for (let index = 0; index < computedStyle.length; index += 1) {
+          const property = computedStyle[index];
+          parts[index] = `${property}:${computedStyle.getPropertyValue(property)};`;
+        }
+        clone.style.cssText = parts.join("");
+      }
+    } catch (_error) {}
+
+    const originalChildren = original.children;
+    const clonedChildren = clone.children;
+    for (
+      let index = 0;
+      index < originalChildren.length && index < clonedChildren.length;
+      index += 1
+    ) {
+      inlineAll(originalChildren[index], clonedChildren[index]);
+    }
+  }
+
+  function extractFontUrl(srcValue) {
+    const matches = [
+      ...srcValue.matchAll(
+        /url\(["']?([^"')]+)["']?\)(?:\s*format\(["']?([^"')]+)["']?\))?/gi,
+      ),
+    ];
+    if (matches.length === 0) return null;
+    const woff2 = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff2"));
+    if (woff2) return woff2[1];
+    const woff = matches.find((m) => m[2] && m[2].toLowerCase().includes("woff"));
+    if (woff) return woff[1];
+    return matches[0][1];
+  }
+
+  // Cache resolved font URL -> data URI across captures. Fonts on a page
+  // essentially never change, and a batch run emits multiple captures back to
+  // back — without this we'd refetch + re-base64 every time.
+  const fontDataUriCache = new Map();
+  const SRC_DECLARATION_RE = /src\s*:\s*[^;}]+/i;
+
+  async function fetchAsDataUri(url) {
+    if (fontDataUriCache.has(url)) return fontDataUriCache.get(url);
+    let dataUri = null;
+    try {
+      const response = await fetch(url, { mode: "cors", credentials: "omit" });
+      if (response.ok) {
+        const blob = await response.blob();
+        if (blob.size <= MAX_FONT_BYTES) {
+          dataUri = await new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onloadend = () =>
+              resolve(typeof reader.result === "string" ? reader.result : null);
+            reader.onerror = () => resolve(null);
+            reader.readAsDataURL(blob);
+          });
+        }
+      }
+    } catch (_error) {
+      dataUri = null;
+    }
+    fontDataUriCache.set(url, dataUri);
+    return dataUri;
+  }
+
+  function collectFontFaceRuleTexts() {
+    const rules = [];
+    for (const sheet of document.styleSheets) {
+      let cssRules;
+      try {
+        cssRules = sheet.cssRules;
+      } catch (_error) {
+        continue;
+      }
+      if (!cssRules) continue;
+      for (const rule of cssRules) {
+        const cssText = rule.cssText || "";
+        if (cssText.startsWith("@font-face")) rules.push(cssText);
+      }
+    }
+    return rules;
+  }
+
+  async function buildInlinedFontCss() {
+    const ruleTexts = collectFontFaceRuleTexts();
+    if (ruleTexts.length === 0) return null;
+
+    const resolved = ruleTexts.map((cssText) => {
+      if (!SRC_DECLARATION_RE.test(cssText)) return null;
+      const srcMatch = cssText.match(/src\s*:\s*([^;}]+)[;}]/i);
+      if (!srcMatch) return null;
+      const url = extractFontUrl(srcMatch[1]);
+      if (!url) return null;
+      try {
+        return { cssText, url: new URL(url, document.baseURI).href };
+      } catch (_error) {
+        return null;
+      }
+    });
+
+    const dataUris = await Promise.all(
+      resolved.map((entry) => (entry ? fetchAsDataUri(entry.url) : Promise.resolve(null))),
+    );
+
+    const inlined = [];
+    let totalBytes = 0;
+    for (let index = 0; index < resolved.length; index += 1) {
+      const entry = resolved[index];
+      const dataUri = dataUris[index];
+      if (!entry || !dataUri) continue;
+      const approxBytes = dataUri.length * 0.75;
+      if (totalBytes + approxBytes > MAX_TOTAL_FONT_BYTES) break;
+      totalBytes += approxBytes;
+      inlined.push(entry.cssText.replace(SRC_DECLARATION_RE, `src: url("${dataUri}")`));
+    }
+    return inlined.length > 0 ? inlined.join("\n") : null;
+  }
+
+  function stripExternal(clone) {
+    const images = clone.querySelectorAll("img");
+    for (let index = 0; index < images.length; index += 1) {
+      const src = images[index].getAttribute("src");
+      if (src && !src.startsWith("data:")) images[index].removeAttribute("src");
+    }
+
+    const elements = clone.querySelectorAll("*");
+    for (let index = 0; index < elements.length; index += 1) {
+      const style = elements[index].style.cssText;
+      if (style && style.includes("url(")) {
+        elements[index].style.cssText = style.replace(
+          /url\(["']?(?!data:)[^)"']*["']?\)/gi,
+          "none",
+        );
+      }
+    }
+  }
+
+  function emitScroll() {
+    scrollRaf = 0;
+    if (!scrollForwarding) return;
+    postToTrustedTop({
+      type: "INLINE_EDIT_SCROLL",
+      scrollX: window.scrollX,
+      scrollY: window.scrollY,
+      capabilities: PICK_CAPABILITIES,
+    });
+  }
+
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!scrollForwarding || scrollRaf) return;
+      scrollRaf = requestAnimationFrame(emitScroll);
+    },
+    { passive: true, capture: true },
+  );
+
+  async function handleCaptureRequest(event) {
+    const requestId = event.data.requestId;
+    const scrollX = window.scrollX;
+    const scrollY = window.scrollY;
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    function postResult(dataUrl) {
+      postToTrustedTop({
+        type: "INLINE_EDIT_SCREENSHOT_RESULT",
+        requestId,
+        dataUrl,
+        scrollX,
+        scrollY,
+      });
+    }
+
+    try {
+      // Wait for any pending web fonts to resolve so both inline metrics and
+      // the @font-face inlining below see the same loaded faces.
+      if (document.fonts && document.fonts.ready) {
+        try {
+          await document.fonts.ready;
+        } catch (_error) {}
+      }
+
+      const clone = document.documentElement.cloneNode(true);
+      inlineAll(document.documentElement, clone);
+
+      const removedNodes = clone.querySelectorAll("script,link[rel=\"stylesheet\"],style");
+      for (let index = 0; index < removedNodes.length; index += 1) {
+        removedNodes[index].remove();
+      }
+
+      stripExternal(clone);
+
+      // Re-embed web fonts as data-URI @font-face rules so the SVG rasterizer
+      // can resolve them — external font URLs aren't fetched during
+      // foreignObject rendering, which would otherwise force a fallback face
+      // and change text metrics.
+      const inlinedFontCss = await buildInlinedFontCss();
+      if (inlinedFontCss) {
+        const styleEl = document.createElement("style");
+        styleEl.textContent = inlinedFontCss;
+        const head = clone.querySelector("head");
+        if (head) head.appendChild(styleEl);
+        else clone.insertBefore(styleEl, clone.firstChild);
+      }
+
+      const html = new XMLSerializer().serializeToString(clone);
+      const svg =
+        `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}">` +
+        '<foreignObject width="100%" height="100%">' +
+        `<div xmlns="http://www.w3.org/1999/xhtml" style="width:${width}px;height:${height}px;overflow:hidden">` +
+        `<div style="position:relative;left:-${scrollX}px;top:-${scrollY}px">` +
+        html +
+        "</div></div></foreignObject></svg>";
+      const svgUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      const image = new Image();
+      image.onload = function () {
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0);
+        postResult(canvas.toDataURL("image/png"));
+      };
+      image.onerror = function () {
+        postResult(null);
+      };
+      image.src = svgUrl;
+    } catch (_error) {
+      postResult(null);
+    }
+  }
+
+  window.addEventListener("message", function (event) {
+    if (!event.data) return;
+    // Only accept messages from the direct parent frame. Blocks sibling /
+    // unrelated-window postMessage senders that could otherwise reach us.
+    if (event.source !== window.parent) return;
+
+    const trustedParentOrigin = getTrustedParentOrigin(event);
+    if (!trustedParentOrigin) return;
+    trustedTopOrigin = trustedParentOrigin;
+
+    if (event.data.type === "INLINE_EDIT_PICK") {
+      const element = resolvePickTarget(event.data.x, event.data.y);
+      postToTrustedTop({
+        type: "INLINE_EDIT_PICK_RESULT",
+        seq: event.data.seq,
+        target: element ? describePickTarget(element, event.data.fresh === true) : null,
+      });
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_START") {
+      scrollForwarding = true;
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_STOP") {
+      scrollForwarding = false;
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
+      scrollRaf = 0;
+      return;
+    }
+
+    if (event.data.type === "INLINE_EDIT_SCROLL_BY") {
+      const { deltaX, deltaY, deltaMode } = event.data;
+      if (!scrollForwarding || !Number.isFinite(deltaX) || !Number.isFinite(deltaY)) return;
+      if (deltaMode !== 0 && deltaMode !== 1 && deltaMode !== 2) return;
+      const lineHeight =
+        parseFloat(getComputedStyle(document.documentElement).lineHeight) || DEFAULT_LINE_HEIGHT;
+      const scaleX = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerWidth : 1;
+      const scaleY = deltaMode === 1 ? lineHeight : deltaMode === 2 ? window.innerHeight : 1;
+      // The selection overlay receives the wheel event instead of this iframe.
+      // Instant scrolling preserves trackpad deltas even on smooth-scroll sites.
+      window.scrollBy({ left: deltaX * scaleX, top: deltaY * scaleY, behavior: "instant" });
+      emitScroll();
+      return;
+    }
+
+    if (event.data.type !== "INLINE_EDIT_CAPTURE_REQUEST") return;
+
+    handleCaptureRequest(event);
+  });
+})();
+
+
+</script></body>
+</html>
