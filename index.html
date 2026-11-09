@@ -240,6 +240,62 @@ footer{background:var(--color-surface);border-top:1px solid var(--color-divider)
 .footer-nav a{font-size:var(--text-xs);color:var(--color-text-muted);text-decoration:none}
 .footer-nav a:hover{color:var(--color-primary)}
 
+/* ─── GLOW & TRANSITIONS ──────────────────────────────────── */
+@property --ang {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+.project-card { position: relative; }
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-xl);
+  padding: 1.5px;
+  background: conic-gradient(from var(--ang),
+    transparent 0 8%, var(--color-primary) 18%,
+    var(--color-gold) 28%, transparent 38% 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity .4s ease;
+  animation: spin-border 4s linear infinite;
+  pointer-events: none;
+}
+.project-card:hover::before { opacity: 1; }
+@keyframes spin-border { to { --ang: 360deg; } }
+
+  
+  .btn-primary, .nav-cta { position: relative; overflow: hidden; }
+.btn-primary::after, .nav-cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(100deg, transparent, oklch(0.98 0 0 / 0.5), transparent);
+  transform: skewX(-20deg);
+  transition: left .7s ease;
+}
+.btn-primary:hover::after, .nav-cta:hover::after { left: 150%; }
+
+
+  .projects-grid { perspective: 1200px; }
+.project-card {
+  transform-style: preserve-3d;
+  transition: transform .5s cubic-bezier(.16,1,.3,1), box-shadow .5s ease;
+}
+.project-card:hover {
+  transform: rotateX(4deg) rotateY(-6deg) translateY(-4px) scale(1.02);
+}
+.project-body {
+  transform-style: preserve-3d;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.project-card:hover .project-body { transform: translateZ(24px); }
 /* ─── FADE-IN ─────────────────────────────────────────────── */
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
@@ -295,7 +351,7 @@ footer{background:var(--color-surface);border-top:1px solid var(--color-divider)
       <a href="#projects" class="btn-primary">View My Work
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#resume" class="btn-outline">Download Resume</a>
+<a href="IzzyKresume.docx" download class="btn-outline">⬇ Download Resume </a>
     </div>
     <div class="me-stats">
       <div>
@@ -600,7 +656,7 @@ footer{background:var(--color-surface);border-top:1px solid var(--color-divider)
         <span class="resume-toolbar-title">Israel O. Kukoyi — Resume 2026</span>
         <div class="resume-toolbar-actions">
           <button class="resume-btn-outline" onclick="window.print()">🖨️ Print</button>
-          <button class="resume-btn" onclick="downloadResume()">⬇ Download PDF</button>
+          <button class="resume-btn" onclick="location.href='izzyKresume.docx'">⬇ Download Resume</button>
         </div>
       </div>
       <div class="resume-doc" id="resume-content">
@@ -852,10 +908,6 @@ document.querySelectorAll('.skills-grid, .projects-grid').forEach(grid => {
   grid.querySelectorAll('.fade-in').forEach((el, i) => { el.style.transitionDelay = (i * 80) + 'ms'; });
 });
 
-// Resume download (print to PDF)
-function downloadResume() {
-  window.print();
-}
 
 // Contact form — sends to your email via FormSubmit (https://formsubmit.co).
 // No signup or API key needed: the FIRST submission triggers a one-time
