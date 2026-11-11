@@ -327,33 +327,7 @@ footer{background:var(--color-surface);border-top:1px solid var(--color-divider)
 }
 .nav-links a:hover::after { transform: scaleX(1); }
 
-  .me-name:hover { animation: glitch .35s steps(2, end) 2; }
-@keyframes glitch {
-  0%   { text-shadow:  2px 0 var(--color-gold), -2px 0 var(--color-primary); }
-  25%  { text-shadow: -3px 0 var(--color-gold),  3px 0 var(--color-primary); }
-  50%  { text-shadow:  2px -1px var(--color-gold), -2px 1px var(--color-primary); }
-  75%  { text-shadow: -2px 1px var(--color-gold),  2px -1px var(--color-primary); }
-  100% { text-shadow:  2px 0 var(--color-gold), -2px 0 var(--color-primary); }
-
-  .skill-card .skill-icon {
-  transition: transform .4s cubic-bezier(.34,1.56,.64,1), box-shadow .4s ease;
-}
-.skill-card:hover .skill-icon {
-  transform: scale(1.15) rotate(-8deg);
-  box-shadow: 0 0 18px oklch(from var(--color-primary) l c h / 0.4);
-}
-.skill-card .tag {
-  transition: transform .3s cubic-bezier(.34,1.56,.64,1),
-              background .3s ease, color .3s ease;
-}
-.skill-card:hover .tag { transform: translateY(-2px); }
-.skill-card:hover .tag:nth-child(odd) {
-  background: var(--color-primary-highlight);
-  color: var(--color-primary);
-}
-
   
-}
 /* ─── FADE-IN ─────────────────────────────────────────────── */
 .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
 .fade-in.visible{opacity:1;transform:translateY(0)}
